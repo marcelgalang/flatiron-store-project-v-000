@@ -1,12 +1,22 @@
 <nav class="">
     <ul>
         <li> <%= link_to "Store Home", store_path %> </li>
-        <li><%= link_to("Sign In", user_session_path) %></li>
-        <li><%= link_to("Sign Out", destroy_user_session_path) %></li>
-        <li><%= link_to("Sign Up", new_user_registration_path) %></li>
-
-        <% if !!@cart %>
-          <li> <%= link_to "Cart", cart_path(current_cart) %></li>
+        <% if user_signed_in? %>
+          <% if !!@cart %>
+            <li> <%= link_to "Cart", cart_path(@cart) %></li>
+          <% end %>
+          <%= "Signed in as #{current_user.email}" %>
+          <li> <%= link_to "Sign out", store_path %></li>
+          <li> <%= link_to "sign in", new_user_session_path %></li>
+        <% else %>
+          <li> <%= link_to "sign in", new_user_session_path %></li>
+          <li> <%= link_to "Sign up", new_user_registration_path %></li>
         <% end %>
+
+        <% if current_user && current_user.current_cart %>
+        <%binding.pry%>
+
+         <li> <%= link_to "Cart", cart_path(current_user.current_cart) %></li>
+       <% end %>
     </ul>
 </nav>

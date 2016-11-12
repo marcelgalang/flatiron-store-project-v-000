@@ -14,7 +14,7 @@
         <% end %>
 
         <% if current_user && current_user.current_cart %>
-        <%binding.pry%>
+      
 
          <li> <%= link_to "Cart", cart_path(current_user.current_cart) %></li>
        <% end %>
